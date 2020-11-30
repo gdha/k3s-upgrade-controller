@@ -323,7 +323,7 @@ As you can see from the sequence first the k3s-server gets updated and thereafte
 
 After a couple of minutes we see:
 
-````bash
+```bash
 $ kubectl get nodes
 NAME   STATUS   ROLES    AGE    VERSION
 n1     Ready    master   117d   v1.19.4+k3s1
