@@ -22,7 +22,7 @@ curl -s "https://api.github.com/repos/rancher/system-upgrade-controller/releases
 v0.6.2
 ```
 
-To download the CRD locally execute:
+To download the CRD locally run the following command:
 
 ```bash
 $ wget https://raw.githubusercontent.com/rancher/system-upgrade-controller/v0.6.2/manifests/system-upgrade-controller.yaml
@@ -60,7 +60,7 @@ NAME   STATUS   ROLES    AGE    VERSION
 n1     Ready    master   117d   v1.19.2+k3s1
 ```
 
-Here we see that node *n1* was laready labelled 'master', however, if that was not yet the case we could realize this by:
+Here we see that node *n1* was already labelled 'master', however, if that was not yet the case we could realize this by:
 
 ```bash
 kubectl label node n1 node-role.kubernetes.io/master=true
@@ -76,7 +76,7 @@ plan.upgrade.cattle.io/k3s-agent created
 
 Check out if the Plans were added correctly:
 
-```bash
+```yaml
 $ kubectl describe plans.upgrade.cattle.io  -n system-upgrade
 Name:         k3s-server
 Namespace:    system-upgrade
