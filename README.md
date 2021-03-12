@@ -346,7 +346,7 @@ node/n3 labeled
 
 If we want to upgrade again just edit the plan [4] again with the correct version of k3s and replace the plan with the command:
 
-````bash
+```bash
 $ kubectl replace -f ./k3s-upgrade-plan.yaml
 ```
 
