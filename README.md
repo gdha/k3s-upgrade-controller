@@ -344,7 +344,13 @@ node/n4 labeled
 node/n3 labeled
 ```
 
-If we want to upgrade again just edit the plan [4] again with the correct version of k3s and overwrite the label k3s-upgrade again with keyword *enabled*.
+If we want to upgrade again just edit the plan [4] again with the correct version of k3s and replace the plan with the command:
+
+````bash
+$ kubectl replace -f ./k3s-upgrade-plan.yaml
+```
+
+To start the k3s version upgrade overwrite the label k3s-upgrade again with keyword *enabled*.
 
 ## References
 
