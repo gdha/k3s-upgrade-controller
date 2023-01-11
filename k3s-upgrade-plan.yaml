@@ -1,3 +1,6 @@
+# Example: https://github.com/rancher/system-upgrade-controller/blob/master/examples/k3s-upgrade.yaml
+# Documentation: https://docs.k3s.io/upgrades/automated
+
 ---
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
@@ -8,7 +11,7 @@ metadata:
     k3s-upgrade: server
 spec:
   concurrency: 1
-  version: v1.22.4+k3s1
+  version: v1.26.0+k3s2
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -32,7 +35,7 @@ metadata:
     k3s-upgrade: agent
 spec:
   concurrency: 2
-  version: v1.22.4+k3s1
+  version: v1.26.0+k3s2
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -42,11 +45,11 @@ spec:
       - {key: node-role.kubernetes.io/master, operator: NotIn, values: ["true"]}
   serviceAccountName: system-upgrade
   prepare:
-    # Since v0.5.0-m1 SUC will use the resolved version of the plan for the tag on the prepare container.
-    # image: rancher/k3s-upgrade:v1.17.4-k3s1
+    # Defaults to the same "resolved" tag that is used for the `upgrade` container, NOT `latest`
     image: rancher/k3s-upgrade
     args: ["prepare", "k3s-server"]
   drain:
     force: true
+    skipWaitForDeleteTimeout: 60 # 1.18+ (honor pod disruption budgets up to 60 seconds per pod then moves on)
   upgrade:
     image: rancher/k3s-upgrade
